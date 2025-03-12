@@ -275,7 +275,7 @@ c(7, 30, 90) %>%
 # wtm_data <-
 #   openxlsx::read.xlsx("data/Presidential candidates, last 30 days.xlsx", sheet = 2) %>% janitor::clean_names()
 
-uswtm <- read_csv("data/a3e3ccea-dfac-4864-985c-215c5d15e8a7.csv.gzip") 
+uswtm <- read_csv("data/6c42b28b-2f80-4443-82ea-cfb061bd8bd9.csv.gzip") 
 # count(enti)
 
 wtm_data <-
@@ -780,8 +780,8 @@ if (!exists("last7")) {
 # da90 <- mark_list[[3]]
 # 
 # da7 %>%  filter(page_id == "153080620724")
-da30 <- metatargetr::get_targeting_db("AU", 30, us_markers$ds[1]) 
-da7 <- metatargetr::get_targeting_db("AU", 7, us_markers$ds[1]) 
+da30 <- metatargetr::get_targeting_db(thecntry, 30, us_markers$ds[1]) 
+da7 <- metatargetr::get_targeting_db(thecntry, 7, us_markers$ds[1]) 
 
 
 # saveRDS(da90, "data/election_dat90.rds")

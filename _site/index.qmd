@@ -66,7 +66,7 @@ color_dat <- color_dat %>%
 
 # election_dat7 %>% filter(internal_id == "153080620724")
 
-sets <- list(cntry = "AU")
+sets <- list(cntry = "CA")
 ```
 
 

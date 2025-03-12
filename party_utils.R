@@ -387,7 +387,10 @@ all_dat <- readRDS("../data/all_data.rds")
 
 
 
-classified_advertisers <- read_csv("../data/6ef97a03-5215-4f08-868c-6a5325a60ddc.csv")%>% filter(entities_groups.group_name == "National Political Parties")  %>% 
+classified_advertisers <- read_csv("../data/6c42b28b-2f80-4443-82ea-cfb061bd8bd9.csv.gzip",
+                                   col_types = cols(.default = col_character())) %>% 
+  
+  # filter(entities_groups.group_name == "National Political Parties")  %>% 
   select(page_id = advertisers_platforms.advertiser_platform_ref, page_name = advertisers_platforms.advertiser_platform_name, classification = entities.name, colo = entities.color) %>%
   distinct(page_id, .keep_all = T)
 
