@@ -32,7 +32,7 @@ pacman::p_load(knitr, tidyverse, rmarkdown, openxlsx, shiny, rvest)
 source(here::here("utils.R"))
 source(here::here("party_utils.R"))
 
-sets <- list(cntry = "AU")
+sets <- list(cntry = "CA")
 
 ```
 

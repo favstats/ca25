@@ -35,15 +35,17 @@ color_dat <- color_dat %>%
   mutate(colors = case_when(
     colors == "orange" ~ "#f77604",
     colors == "green" ~ "#7aba2d",
+    colors == "lightgreen" ~ "#90EE90",
     colors == "darkgray" ~ "#A9A9A9",
     colors == "darkblue" ~ "#000080",
+      colors == "black" ~ "#000000",
     colors == "lightblue" ~ "#ADD8E6",
     colors == "#ccc" ~ "#cccccc",
     is.na(colors) ~ "#00BFFF",
     T ~ colors
   ))
 
-sets <- list(cntry = "AU")
+sets <- list(cntry = "CA")
 
 
 ```
