@@ -35,10 +35,8 @@ color_dat <- color_dat %>%
   mutate(colors = case_when(
     colors == "orange" ~ "#f77604",
     colors == "green" ~ "#7aba2d",
-    colors == "lightgreen" ~ "#90EE90",
     colors == "darkgray" ~ "#A9A9A9",
     colors == "darkblue" ~ "#000080",
-      colors == "black" ~ "#000000",
     colors == "lightblue" ~ "#ADD8E6",
     colors == "#ccc" ~ "#cccccc",
     is.na(colors) ~ "#00BFFF",
@@ -143,7 +141,7 @@ secodndround <-   election_dat30 %>%
       mutate(amount_spent = as.numeric(total_spend_formatted)*total_spend_pct) %>% 
     select(amount_spent, page_name, value, location_type,is_exclusion, num_ads, party, page_id) %>%
     mutate(is_exclusion = as.logical(is_exclusion)) %>% 
-    mutate(value = str_remove_all(value, ", Canada")) %>% 
+    mutate(value = str_remove_all(value, ", Australia")) %>% 
     arrange(desc(amount_spent)) %>% 
     filter(!is_exclusion) %>% 
     select(-is_exclusion)
@@ -215,7 +213,7 @@ page_name = colDef(
         value,
         # a(href = paste0("https://www.google.com/maps/search/?api=1&query=", URLencode(value)),
 a(
-  href = paste0("https://www.google.com/maps/search/?api=1&query=", URLencode(paste(value, "Canada"))),
+  href = paste0("https://www.google.com/maps/search/?api=1&query=", URLencode(paste(value, "Australia"))),
   target = "_blank",  # Opens link in a new tab/window
   rel = "noopener noreferrer",  # Security best practice
   icon("map-marker-alt"),
@@ -247,7 +245,7 @@ a(
     
     # Build the hyperlink
     href <- if (theid != "unknown_page") {
-      paste0("https://www.facebook.com/ads/library/?view_all_page_id=", theid)
+      paste0("https://www.facebook.com/ads/library/?view_all_page_id=", theid, "&country=",sets$cntry)
     } else {
       "#"
     }
@@ -395,7 +393,7 @@ region_dat <- election_dat30 %>%
             num_ads = sum(num_ads)) %>%
   ungroup() %>%
   rename(region = value) %>%
-  mutate(region = str_remove_all(region, ", Canada"))
+  mutate(region = str_remove_all(region, ", Australia"))
 
 the_colors <- region_dat %>%
   group_by(party) %>%
@@ -495,7 +493,7 @@ region_dat <- election_dat30 %>%
             num_ads = sum(num_ads)) %>%
   ungroup() %>%
   rename(region = value) %>%
-  mutate(region = str_remove_all(region, ", Canada"))
+  mutate(region = str_remove_all(region, ", Australia"))
 
 the_colors <- region_dat %>%
   group_by(party) %>%
@@ -568,7 +566,7 @@ secodndround <-   election_dat30 %>%
       mutate(amount_spent = as.numeric(total_spend_formatted)*total_spend_pct) %>% 
     select(amount_spent, page_name, value, location_type,is_exclusion, num_ads, party, page_id) %>%
     mutate(is_exclusion = as.logical(is_exclusion)) %>% 
-    mutate(value = str_remove_all(value, ", Canada")) %>% 
+    mutate(value = str_remove_all(value, ", Australia")) %>% 
     arrange(desc(amount_spent)) %>% 
     filter(is_exclusion) %>% 
     select(-is_exclusion)
@@ -640,7 +638,7 @@ page_name = colDef(
         value,
         # a(href = paste0("https://www.google.com/maps/search/?api=1&query=", URLencode(value)),
 a(
-  href = paste0("https://www.google.com/maps/search/?api=1&query=", URLencode(paste(value, "Canada"))),
+  href = paste0("https://www.google.com/maps/search/?api=1&query=", URLencode(paste(value, "Australia"))),
   target = "_blank",  # Opens link in a new tab/window
   rel = "noopener noreferrer",  # Security best practice
   icon("map-marker-alt"),
@@ -672,7 +670,7 @@ a(
     
     # Build the hyperlink
     href <- if (theid != "unknown_page") {
-      paste0("https://www.facebook.com/ads/library/?view_all_page_id=", theid)
+      paste0("https://www.facebook.com/ads/library/?view_all_page_id=", theid, "&country=",sets$cntry)
     } else {
       "#"
     }
@@ -818,7 +816,7 @@ region_dat <- election_dat30 %>%
             num_ads = sum(num_ads)) %>%
   ungroup() %>%
   rename(region = value) %>%
-  mutate(region = str_remove_all(region, ", Canada"))
+  mutate(region = str_remove_all(region, ", Australia"))
 
 the_colors <- region_dat %>%
   group_by(party) %>%
@@ -879,7 +877,7 @@ region_dat <- election_dat30 %>%
             num_ads = sum(num_ads)) %>%
   ungroup() %>%
   rename(region = value) %>%
-  mutate(region = str_remove_all(region, ", Canada"))
+  mutate(region = str_remove_all(region, ", Australia"))
 
 the_colors <- region_dat %>%
   group_by(party) %>%
