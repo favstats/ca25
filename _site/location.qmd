@@ -245,7 +245,7 @@ a(
     
     # Build the hyperlink
     href <- if (theid != "unknown_page") {
-      paste0("https://www.facebook.com/ads/library/?view_all_page_id=", theid, "&country=",sets$cntry)
+      paste0("https://www.facebook.com/ads/library/?view_all_page_id=", theid, "&country=",sets$cntry, "&active_status=all")
     } else {
       "#"
     }
@@ -670,7 +670,7 @@ a(
     
     # Build the hyperlink
     href <- if (theid != "unknown_page") {
-      paste0("https://www.facebook.com/ads/library/?view_all_page_id=", theid, "&country=",sets$cntry)
+      paste0("https://www.facebook.com/ads/library/?view_all_page_id=", theid, "&country=",sets$cntry, "&active_status=all")
     } else {
       "#"
     }
