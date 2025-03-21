@@ -411,6 +411,7 @@ election_dat30 <- readRDS("../data/election_dat30.rds")  %>%
   drop_na(party) %>%
   mutate(internal_id = page_id) %>%
   filter(!(party %in% c("Others","And", "AND", "Reg", "Oth", "Gov", "Sta", "Inv", "Pol", "Company", "Other Political Party","Government Institution","Independent", "Media Organization", "NGO/Civil Society","Unknown", "Government"))) %>% 
+  filter(str_detect(party, "Climate advocacy|gas advertisers", negate = T)) %>% 
   # mutate(party = entities.name) %>% 
   drop_na(party) %>% 
   mutate(total_spend_formatted = readr::parse_number(total_spend_formatted)) %>% 
@@ -430,6 +431,7 @@ election_dat7 <- readRDS("../data/election_dat7.rds")  %>%
   drop_na(party) %>%
   mutate(internal_id = page_id) %>%
   filter(!(party %in% c("Others","And", "AND", "Reg", "Oth", "Gov", "Sta", "Inv", "Pol", "Company", "Other Political Party","Government Institution","Independent", "Media Organization", "NGO/Civil Society","Unknown", "Government"))) %>% 
+  filter(str_detect(party, "Climate advocacy|gas advertisers", negate = T)) %>% 
   # mutate(party = entities.name) %>% 
   drop_na(party)  %>% 
   mutate(total_spend_formatted = readr::parse_number(total_spend_formatted)) %>% 
