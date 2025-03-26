@@ -275,7 +275,41 @@ c(7, 30, 90) %>%
 # wtm_data <-
 #   openxlsx::read.xlsx("data/Presidential candidates, last 30 days.xlsx", sheet = 2) %>% janitor::clean_names()
 
-uswtm <- read_csv("data/6c42b28b-2f80-4443-82ea-cfb061bd8bd9.csv.gzip") 
+
+library(httr)
+
+url <- "https://data-api.whotargets.me/advertisers-export-csv"
+
+token <- Sys.getenv("WHO_TARGETS_TOKEN")
+
+headers <- add_headers(
+  accept = "application/json",
+  `accept-language` = "en-US,en;q=0.9,de-DE;q=0.8,de;q=0.7,nl;q=0.6,it;q=0.5,sv;q=0.4,is;q=0.3",
+  authorization = paste("Bearer", token),
+  `content-type` = "application/json",
+  priority = "u=1, i",
+  `sec-ch-ua` = '"Chromium";v="134", "Not:A-Brand";v="24", "Google Chrome";v="134"',
+  `sec-ch-ua-mobile` = "?0",
+  `sec-ch-ua-platform` = '"macOS"',
+  `sec-fetch-dest` = "empty",
+  `sec-fetch-mode` = "cors",
+  `sec-fetch-site` = "same-site"
+)
+
+body <- list(
+  alpha2 = stringr::str_to_lower(thecntry),
+  should_be_emailed = FALSE
+)
+
+response <- POST(url, headers, body = body, encode = "json")
+
+# library(tidyverse)
+
+# vroom::vroom(url(content(response, "parsed")$url))
+
+download.file(content(response, "parsed")$url, destfile = "wtmdata.csv")
+
+uswtm <- readr::read_csv("wtmdata.csv") 
 # count(enti)
 
 wtm_data <-
