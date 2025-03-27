@@ -383,7 +383,14 @@
 # # }
 
 all_dat <- readRDS("../data/all_data.rds") %>%
-  filter(str_detect(entities_groups.group_name, "Parties"))
+  filter(str_detect(entities_groups.group_name, "Parties|party"))
+
+# readRDS("data/all_data.rds") %>% count(entities_groups.group_name)
+
+# all_dat <- readRDS("../data/all_data.rds") %>%
+#   filter(str_detect(entities_groups.group_name, "Parties"))
+
+# all_dat %>% count(party)
 
 # readRDS("data/all_data.rds") %>% count(entities_groups.group_name)
 
@@ -420,8 +427,18 @@ election_dat30 <- readRDS("../data/election_dat30.rds")  %>%
   mutate(num_ads = readr::parse_number(num_ads))
 
 
+# readRDS("data/election_dat30.rds")  %>%
+#   as_tibble() %>%
+#   select(-party) %>%
+#   # left_join(classified_advertisers %>% select(page_id, party = classification)) %>%
+#   filter(is.na(no_data)) %>%
+#   left_join(all_dat %>% select(page_id, party, entities.name)) %>%
+#   drop_na(party) %>%
+#   count(entities.name)
 
-election_dat7 <- readRDS("../data/election_dat7.rds")  %>% 
+# all_dat %>% select(page_id, party, entities.name) %>% count(entities.name)
+
+election_dat7 <- readRDS("../data/election_dat7.rds")  %>%
   as_tibble() %>% 
   select(-party) %>%
   # left_join(classified_advertisers %>% select(page_id, party = classification)) %>% 

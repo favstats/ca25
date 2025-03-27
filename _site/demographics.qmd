@@ -34,6 +34,7 @@ source(here::here("party_utils.R"))
 
 sets <- list(cntry = "CA")
 
+# election_dat30 %>% count(party)
 ```
 
 ::: {.panel-tabset}

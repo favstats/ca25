@@ -312,6 +312,7 @@ download.file(content(response, "parsed")$url, destfile = "wtmdata.csv")
 uswtm <- readr::read_csv("wtmdata.csv") 
 # count(enti)
 
+
 # uswtm %>% count(entities.name, entities_groups.group_name) %>% View()
 
 wtm_data <-
@@ -341,6 +342,7 @@ wtm_data <-
   filter(party != "Oth")
 # View()
 
+# wtm_data %>% count(entities.name)
 
 
 # uswtm %>% count(entities.short_name, platforms.name, sort = T) %>% View()
@@ -386,8 +388,10 @@ all_dat <- bind_rows(wtm_data) %>%
 
 # all_dat %>% count(party, sort = T)
 # all_dat %>% nrow
-
+# getwd()
 saveRDS(all_dat, "data/all_data.rds")
+
+# readRDS("data/all_data.rds") %>% count(party)
 
 write_lines(all_dat %>% count(page_id, sort = T) %>% nrow, "n_advertisers.txt")
 
