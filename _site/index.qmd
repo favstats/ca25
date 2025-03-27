@@ -69,6 +69,10 @@ color_dat <- color_dat %>%
 sets <- list(cntry = "CA")
 ```
 
+```{r}
+# election_dat30 %>% count(party)
+```
+
 
 
 ```{r}

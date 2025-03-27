@@ -312,6 +312,8 @@ download.file(content(response, "parsed")$url, destfile = "wtmdata.csv")
 uswtm <- readr::read_csv("wtmdata.csv") 
 # count(enti)
 
+# uswtm %>% count(entities.name, entities_groups.group_name) %>% View()
+
 wtm_data <-
   uswtm %>% 
   # filter(entities.short_name %in% c("Harris", "Trump", "Dems", "DemPAC", "RepPAC", "Prog", "Con", "GOP")) %>%
@@ -335,7 +337,8 @@ wtm_data <-
   # distinct(entities.color) %>% 
   mutate(color = entities.color) %>% 
   filter(platforms.name == "Meta") %>% 
-  mutate(page_name = name)
+  mutate(page_name = name) %>% 
+  filter(party != "Oth")
 # View()
 
 
@@ -352,7 +355,14 @@ wtm_data <-
 
 # rommeta %>% count(party) %>% View()
 
+# bind_rows(wtm_data) %>%
+#   # filter(party %in% c("ProL", "ProC")) %>% 
+#   # count(page_id)
+#   filter(page_id == "6095483909") %>% View()
+#   View()
+
 all_dat <- bind_rows(wtm_data) %>%
+  
   distinct(page_id, .keep_all = T) %>%
   add_count(page_name, sort  = T) %>%
   mutate(remove_em = n >= 2 & str_ends(page_id, "0")) %>%
@@ -362,6 +372,7 @@ all_dat <- bind_rows(wtm_data) %>%
   select(-n)  %>%
   mutate_all(as.character)
 
+# all_dat %>% count(party)
 
 
 # all_dat %>% count(party)
