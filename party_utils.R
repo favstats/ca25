@@ -382,15 +382,13 @@
 # #   
 # # }
 
-all_dat <- readRDS("../data/all_data.rds")
+all_dat <- readRDS("../data/all_data.rds") %>%
+  filter(entities_groups.group_name %in% c("National Political Parties", "Climate-related"))
 
 
+# all_dat %>% count(entities_groups.group_name)
 
-
-classified_advertisers <- read_csv("../data/6c42b28b-2f80-4443-82ea-cfb061bd8bd9.csv.gzip",
-                                   col_types = cols(.default = col_character())) %>% 
-  
-  # filter(entities_groups.group_name == "National Political Parties")  %>% 
+classified_advertisers <- all_dat  %>% 
   select(page_id = advertisers_platforms.advertiser_platform_ref, page_name = advertisers_platforms.advertiser_platform_name, classification = entities.name, colo = entities.color) %>%
   distinct(page_id, .keep_all = T)
 
@@ -402,17 +400,18 @@ color_dat <- classified_advertisers %>% distinct(classification, colo) %>%
 #   distinct(page_id, .keep_all = T) %>% 
 #   filter(classification != "unknown")
 
+
 election_dat30 <- readRDS("../data/election_dat30.rds")  %>% 
   as_tibble() %>% 
   select(-party) %>%
-  left_join(classified_advertisers %>% select(page_id, party = classification)) %>% 
+  # left_join(classified_advertisers %>% select(page_id, party = classification)) %>% 
   filter(is.na(no_data)) %>% 
-  # left_join(all_dat %>% select(page_id, party)) %>% 
+  left_join(all_dat %>% select(page_id, party, entities.name)) %>%
   drop_na(party) %>%
   mutate(internal_id = page_id) %>%
-  filter(!(party %in% c("Others","And", "AND", "Reg", "Oth", "Gov", "Sta", "Inv", "Pol", "Company", "Other Political Party","Government Institution","Independent", "Media Organization", "NGO/Civil Society","Unknown", "Government"))) %>% 
+  filter(!(party %in% c("Others","And", "AND", "Reg", "Oth", "Gov", "Sta", "Inv", "Pol", "Company", "Other Political Party","Government Institution","Independent", "Media Organization", "NGO/Civil Society","Unknown", "Government", "Federal Government", "FedGov", "LocGov"))) %>% 
+  mutate(party = entities.name) %>%
   filter(str_detect(party, "Climate advocacy|gas advertisers", negate = T)) %>% 
-  # mutate(party = entities.name) %>% 
   drop_na(party) %>% 
   mutate(total_spend_formatted = readr::parse_number(total_spend_formatted)) %>% 
   mutate(total_num_ads = readr::parse_number(total_num_ads))%>% 
@@ -424,19 +423,18 @@ election_dat30 <- readRDS("../data/election_dat30.rds")  %>%
 election_dat7 <- readRDS("../data/election_dat7.rds")  %>% 
   as_tibble() %>% 
   select(-party) %>%
-  left_join(classified_advertisers %>% select(page_id, party = classification)) %>% 
-  filter(is.na(no_data))  %>% 
-  # select(-party) %>% 
-  # left_join(all_dat %>% select(page_id, party)) %>% 
+  # left_join(classified_advertisers %>% select(page_id, party = classification)) %>% 
+  filter(is.na(no_data)) %>% 
+  left_join(all_dat %>% select(page_id, party, entities.name)) %>%
   drop_na(party) %>%
   mutate(internal_id = page_id) %>%
-  filter(!(party %in% c("Others","And", "AND", "Reg", "Oth", "Gov", "Sta", "Inv", "Pol", "Company", "Other Political Party","Government Institution","Independent", "Media Organization", "NGO/Civil Society","Unknown", "Government"))) %>% 
+  filter(!(party %in% c("Others","And", "AND", "Reg", "Oth", "Gov", "Sta", "Inv", "Pol", "Company", "Other Political Party","Government Institution","Independent", "Media Organization", "NGO/Civil Society","Unknown", "Government", "Federal Government", "FedGov", "LocGov"))) %>% 
+  mutate(party = entities.name) %>%
   filter(str_detect(party, "Climate advocacy|gas advertisers", negate = T)) %>% 
-  # mutate(party = entities.name) %>% 
-  drop_na(party)  %>% 
+  drop_na(party) %>% 
   mutate(total_spend_formatted = readr::parse_number(total_spend_formatted)) %>% 
   mutate(total_num_ads = readr::parse_number(total_num_ads))%>% 
-  mutate(total_spend_pct = as.numeric(total_spend_pct)) %>% 
+  mutate(total_spend_pct = as.numeric(total_spend_pct))%>% 
   mutate(num_ads = readr::parse_number(num_ads))
   
 

@@ -334,7 +334,7 @@ wtm_data <-
   mutate(page_id = advertisers_platforms.advertiser_platform_ref) %>% 
   # distinct(entities.color) %>% 
   mutate(color = entities.color) %>% 
-  filter(platforms.name == "Facebook") %>% 
+  filter(platforms.name == "Meta") %>% 
   mutate(page_name = name)
 # View()
 
@@ -817,6 +817,7 @@ if (!exists("last7")) {
 da30 <- metatargetr::get_targeting_db(thecntry, 30, us_markers$ds[1]) 
 da7 <- metatargetr::get_targeting_db(thecntry, 7, us_markers$ds[1]) 
 
+# da30 %>% filter(page_id == "220942375077886")
 
 # saveRDS(da90, "data/election_dat90.rds")
 saveRDS(da30, "data/election_dat30.rds")
