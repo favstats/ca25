@@ -383,8 +383,9 @@
 # # }
 
 all_dat <- readRDS("../data/all_data.rds") %>%
-  filter(entities_groups.group_name %in% c("National Political Parties", "Climate-related"))
+  filter(str_detect(entities_groups.group_name, "Parties"))
 
+# readRDS("data/all_data.rds") %>% count(entities_groups.group_name)
 
 # all_dat %>% count(entities_groups.group_name)
 
