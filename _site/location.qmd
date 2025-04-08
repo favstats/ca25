@@ -141,7 +141,7 @@ secodndround <-   election_dat30 %>%
       mutate(amount_spent = as.numeric(total_spend_formatted)*total_spend_pct) %>% 
     select(amount_spent, page_name, value, location_type,is_exclusion, num_ads, party, page_id) %>%
     mutate(is_exclusion = as.logical(is_exclusion)) %>% 
-    mutate(value = str_remove_all(value, ", Australia")) %>% 
+    mutate(value = str_remove_all(value, ", Canada")) %>% 
     arrange(desc(amount_spent)) %>% 
     filter(!is_exclusion) %>% 
     select(-is_exclusion)
@@ -213,7 +213,7 @@ page_name = colDef(
         value,
         # a(href = paste0("https://www.google.com/maps/search/?api=1&query=", URLencode(value)),
 a(
-  href = paste0("https://www.google.com/maps/search/?api=1&query=", URLencode(paste(value, "Australia"))),
+  href = paste0("https://www.google.com/maps/search/?api=1&query=", URLencode(paste(value, "Canada"))),
   target = "_blank",  # Opens link in a new tab/window
   rel = "noopener noreferrer",  # Security best practice
   icon("map-marker-alt"),
@@ -393,7 +393,7 @@ region_dat <- election_dat30 %>%
             num_ads = sum(num_ads)) %>%
   ungroup() %>%
   rename(region = value) %>%
-  mutate(region = str_remove_all(region, ", Australia"))
+  mutate(region = str_remove_all(region, ", Canada"))
 
 the_colors <- region_dat %>%
   group_by(party) %>%
@@ -493,7 +493,7 @@ region_dat <- election_dat30 %>%
             num_ads = sum(num_ads)) %>%
   ungroup() %>%
   rename(region = value) %>%
-  mutate(region = str_remove_all(region, ", Australia"))
+  mutate(region = str_remove_all(region, ", Canada"))
 
 the_colors <- region_dat %>%
   group_by(party) %>%
@@ -566,7 +566,7 @@ secodndround <-   election_dat30 %>%
       mutate(amount_spent = as.numeric(total_spend_formatted)*total_spend_pct) %>% 
     select(amount_spent, page_name, value, location_type,is_exclusion, num_ads, party, page_id) %>%
     mutate(is_exclusion = as.logical(is_exclusion)) %>% 
-    mutate(value = str_remove_all(value, ", Australia")) %>% 
+    mutate(value = str_remove_all(value, ", Canada")) %>% 
     arrange(desc(amount_spent)) %>% 
     filter(is_exclusion) %>% 
     select(-is_exclusion)
@@ -638,7 +638,7 @@ page_name = colDef(
         value,
         # a(href = paste0("https://www.google.com/maps/search/?api=1&query=", URLencode(value)),
 a(
-  href = paste0("https://www.google.com/maps/search/?api=1&query=", URLencode(paste(value, "Australia"))),
+  href = paste0("https://www.google.com/maps/search/?api=1&query=", URLencode(paste(value, "Canada"))),
   target = "_blank",  # Opens link in a new tab/window
   rel = "noopener noreferrer",  # Security best practice
   icon("map-marker-alt"),
@@ -816,7 +816,7 @@ region_dat <- election_dat30 %>%
             num_ads = sum(num_ads)) %>%
   ungroup() %>%
   rename(region = value) %>%
-  mutate(region = str_remove_all(region, ", Australia"))
+  mutate(region = str_remove_all(region, ", Canada"))
 
 the_colors <- region_dat %>%
   group_by(party) %>%
@@ -877,7 +877,7 @@ region_dat <- election_dat30 %>%
             num_ads = sum(num_ads)) %>%
   ungroup() %>%
   rename(region = value) %>%
-  mutate(region = str_remove_all(region, ", Australia"))
+  mutate(region = str_remove_all(region, ", Canada"))
 
 the_colors <- region_dat %>%
   group_by(party) %>%
