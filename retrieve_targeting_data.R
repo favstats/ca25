@@ -280,7 +280,7 @@ library(httr)
 
 try({
   
-  
+  # thecntry <- "CA"
   url <- "https://data-api.whotargets.me/advertisers-export-csv"
   
   token <- Sys.getenv("WHO_TARGETS_TOKEN")
