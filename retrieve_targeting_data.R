@@ -835,8 +835,8 @@ if (!exists("last7")) {
 # da90 <- mark_list[[3]]
 # 
 # da7 %>%  filter(page_id == "153080620724")
-da30 <- metatargetr::get_targeting_db(thecntry, 30, us_markers$ds[1]) 
-da7 <- metatargetr::get_targeting_db(thecntry, 7, us_markers$ds[1]) 
+da30 <- metatargetr::get_targeting_db(thecntry, 30, "2025-04-27") 
+da7 <- metatargetr::get_targeting_db(thecntry, 7, "2025-04-27") 
 
 # da30 %>% filter(page_id == "220942375077886")
 
